@@ -1,9 +1,22 @@
 class LivrosController < ApplicationController
   before_filter :verifica_login
 
-  def index
+def index
+  termo = params[:busca]
+
+  if termo.present?
+    @livros = Livro.joins(:autor, :genero).where(
+      "livros.titulo LIKE ? OR autores.nome = ? OR generos.nome = ?", 
+      "%#{termo}%", termo, termo
+    )
+    
+    if @livros.empty?
+      @livros = Livro.where("titulo LIKE ?", "%#{termo}%")
+    end
+  else
     @livros = Livro.all
   end
+end
 
 def new
     @livro = Livro.new
@@ -43,7 +56,7 @@ end
     end
   end
 
-  def delete
+  def destroy
     @livro = Livro.find(params[:id])
     @livro.destroy
     redirect_to livros_path

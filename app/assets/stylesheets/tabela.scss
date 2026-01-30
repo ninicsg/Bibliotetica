@@ -10,13 +10,7 @@ body {
   background-position: center center; 
   
 }
-// .show{
-//   background-color: rgb(34, 9, 9);
-//   display: flex;
-//   color: gold;
-//   width: 25%;
-//   justify-content: center;
-// }
+
 
 .form-caixa{
   background: rgb(153, 64, 64);
@@ -170,6 +164,13 @@ td {
   
 }
 
+.div_index{
+  background-image: image-url('livro_aberto2.jpg');
+  height: 1000px;
+  background-size: cover;            
+  background-repeat: no-repeat;       
+  background-position: center center; 
+}
 .div_new{
   color:gold;
   display: flex;
@@ -215,4 +216,23 @@ td {
   color:white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: gold;
+}
+.sinopse-restrita {
+  max-width: 600px; 
+  margin: 10px 0;  
+  text-align: justify; 
+}
+
+.conteudo-sinopse {
+  max-height: 300px; 
+  overflow-y: auto;
+  padding-right: 10px; 
+}
+
+.conteudo-sinopse::-webkit-scrollbar {
+  width: 6px;
+}
+.conteudo-sinopse::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
 }

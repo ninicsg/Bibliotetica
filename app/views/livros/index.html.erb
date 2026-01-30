@@ -1,40 +1,50 @@
-<h1>Livros</h1>
+<div class="div_index">
+    <h1>Livros</h1>
 
-<div class="acoes-topo">
-  <%= link_to "Novo Livro", new_livro_path, class: "btn-primeiro" %>
-  <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
+    <div class="acoes-topo">
+    <%= link_to "Novo Livro", new_livro_path, class: "btn-primeiro" %>
+    <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
+    </div>
+
+    <div class="busca-container" style="margin-bottom: 20px;">
+        <%= form_tag livros_path, method: :get do %>
+        <%= text_field_tag :busca, params[:busca], placeholder: "Pesquisar título, autor ou gênero...", style: "width: 300px; padding: 5px;" %>
+        <%= submit_tag "Pesquisar", class: "btn-primeiro" %>
+        <%= link_to "Limpar", livros_path, class: "btn-primeiro" if params[:busca].present? %>
+        <% end %>
+    </div>
+
+    <table class="tabela">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Gênero</th>
+        <th>Páginas</th>
+        <th>Ano</th>
+        <th>Sinopse</th>
+        <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @livros.each do |livro| %>
+        <tr>
+            <td><%= livro.id %></td>
+            <td>
+                <%= link_to livro.titulo, livro_path(livro) %>
+            </td>
+            <td><%= livro.autor.nome if livro.autor %></td>
+            <td><%= livro.genero.nome if livro.genero %></td>
+            <td><%= livro.qtd_paginas %></td>
+            <td><%= livro.ano_lancamento %></td>
+            <td><%= truncate(livro.sinopse, length: 100, separator: ' ') %></td>
+            <td>
+            <%= link_to "Editar", edit_livro_path(livro), class: "btn-primeiro" %>
+            <%= link_to "Deletar", destroy_livro_path(livro), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn-primeiro" %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
 </div>
-
-<table class="tabela">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Título</th>
-      <th>Autor</th>
-      <th>Gênero</th>
-      <th>Páginas</th>
-      <th>Ano</th>
-      <th>Sinopse</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @livros.each do |livro| %>
-      <tr>
-        <td><%= livro.id %></td>
-        <td>
-            <%= link_to livro.titulo, livro_path(livro) %>
-        </td>
-        <td><%= livro.autor.nome if livro.autor %></td>
-        <td><%= livro.genero.nome if livro.genero %></td>
-        <td><%= livro.qtd_paginas %></td>
-        <td><%= livro.ano_lancamento %></td>
-        <td><%= truncate(livro.sinopse, length: 50) %></td>
-        <td>
-          <%= link_to "Editar", edit_livro_path(livro), class: "btn-primeiro" %>
-          <%= link_to "Deletar", destroy_livro_path(livro), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn-primeiro" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
