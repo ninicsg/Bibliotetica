@@ -1,7 +1,7 @@
 class Autor < ActiveRecord::Base
     attr_accessible :nome, :data_nasc, :data_morte
     self.table_name = 'autores'
-    validates :nome, :data_nasc, :data_morte, presence: true
+    validates :nome, :data_nasc, presence: true
     def data_nascimento_formatada
         Time.parse("#{self.data_nasc}").strftime('%d/%m/%Y')
     end
@@ -9,6 +9,6 @@ class Autor < ActiveRecord::Base
         Time.parse("#{self.data_morte}").strftime('%d/%m/%Y')
     end
 
-    has_many :livros, dependent: :destroy
+    has_many :livros, dependent: :restrict
 
 end

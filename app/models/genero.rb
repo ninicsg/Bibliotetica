@@ -1,5 +1,5 @@
 class Genero < ActiveRecord::Base
-  attr_accessible :nome # IMPORTANTE: Sem isso, o banco não salva o nome vindo do form
-  has_many :livros
+  attr_accessible :nome 
+  has_many :livros, dependent: :restrict
   validates :nome, presence: true
 end

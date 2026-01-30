@@ -40,9 +40,16 @@ class AutoresController < ApplicationController
     end
 
     def destroy
-        @autor = Autor.find_by_id(params[:id])
+    @autor = Autor.find(params[:id])
+    
+    begin
         @autor.destroy
-        redirect_to autores_path
+        flash[:notice] = "Autor excluído com sucesso!"
+    rescue ActiveRecord::DeleteRestrictionError
+        flash[:alert] = "Não é possível excluir este autor pois ele possui livros vinculados."
+    end
+
+    redirect_to autores_path
     end
 
     # def autor_livros

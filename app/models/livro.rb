@@ -5,4 +5,6 @@ class Livro < ActiveRecord::Base
   belongs_to :genero
 
   validates :titulo, :autor_id, :genero_id, presence: true
+  validates :qtd_paginas, numericality: { only_integer: true, greater_than: 0 }
+
 end

@@ -22,10 +22,18 @@
                         </td>
                         <td>
                             <%= link_to "Editar", edit_genero_path(genero), class: "btn-edit" %>
-                            <%= link_to "Excluir", destroy_genero_path(genero), 
-                                        method: :delete, 
-                                        data: { confirm: "Tem certeza? Isso pode afetar os livros deste gênero." }, 
-                                        class: "btn-delete" %>
+                            <% if genero.livros.any? %>
+                                <%= link_to "Excluir", "#", 
+                                    class: "btn-delete", 
+                                    style: "opacity: 0.5; cursor: not-allowed;", 
+                                    onclick: "alert('Este autor possui #{genero.livros.count} livro(s) e não pode ser excluído.'); return false;" %>
+                            <% else %>
+                                <%= link_to "Excluir",
+                                    genero_path(genero),
+                                    method: :delete,
+                                    data: { confirm: "Tem certeza que deseja excluir o genero #{genero.nome}?" },
+                                    class: "btn-delete" %>
+                            <% end %>     
                         </td>
                     </tr>
                 <% end %>

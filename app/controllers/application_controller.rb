@@ -7,7 +7,10 @@ class ApplicationController < ActionController::Base
 
   def verifica_login
     return if controller_name == 'login'
-    redirect_to root_path unless session[:usuario_id]
+    
+    if session[:usuario_id].nil?
+      redirect_to root_path and return
+    end
   end
 
 end

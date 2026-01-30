@@ -1,6 +1,5 @@
 <h1>Novo Livro</h1>
 
-<%# Ajustei a URL para usar o padrão que você definiu no formulário de edição anterior %>
 <%= form_for @livro, url: @livro.new_record? ? create_livro_path : update_livro_path(@livro) do |f| %>
 
   <% if @livro.errors.any? %>
