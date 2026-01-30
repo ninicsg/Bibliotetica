@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20260129195844) do
+ActiveRecord::Schema.define(:version => 20260130123204) do
 
   create_table "autores", :force => true do |t|
     t.string   "nome"
@@ -23,6 +23,27 @@ ActiveRecord::Schema.define(:version => 20260129195844) do
 
   create_table "generos", :force => true do |t|
     t.string   "nome"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "livros", :force => true do |t|
+    t.integer  "autor_id",       :null => false
+    t.integer  "genero_id"
+    t.string   "titulo",         :null => false
+    t.integer  "qtd_paginas"
+    t.text     "sinopse"
+    t.integer  "ano_lancamento"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "livros", ["autor_id"], :name => "index_livros_on_autor_id"
+  add_index "livros", ["genero_id"], :name => "index_livros_on_genero_id"
+
+  create_table "usuarios", :force => true do |t|
+    t.string   "email"
+    t.string   "senha"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

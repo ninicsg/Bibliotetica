@@ -1,0 +1,16 @@
+<div class="show">
+    <h1><%= @livro.titulo %></h1>
+    
+    <p><strong>Autor:</strong> <%= @livro.autor.try(:nome) || "Não informado" %></p>
+    <p><strong>Gênero:</strong> <%= @livro.genero.try(:nome) || "Não informado" %></p>
+    <p><strong>Ano:</strong> <%= @livro.ano_lancamento %></p>
+    <p><strong>Páginas:</strong> <%= @livro.qtd_paginas %></p>
+    
+    <div class="sinopse">
+        <strong>Sinopse:</strong>
+        <p><%= @livro.sinopse.presence || "Sem sinopse disponível." %></p>
+    </div>
+
+    <%= link_to "Editar", edit_livro_path(@livro) %> |
+    <%= link_to "Voltar", livros_path %>
+</div>

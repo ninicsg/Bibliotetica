@@ -1,0 +1,33 @@
+<div class="dashboard">
+  <h1>Bibliotetica</h1>
+
+  <div class="menu">
+    <div class="card">
+    <b>
+      <%= link_to "Listar Autores", autores_path, class: "criar"%><br>
+      <%= link_to "Novo Autor", new_autor_path, class: "criar"%>
+    </b>
+    </div>
+
+
+ <div class="card">
+      <h2>Livros</h2>
+      <b>
+      <%= link_to "Listar Livros", livros_path, class: "estilo_texto"%><br>
+      <%= link_to "Novo Livro", new_livro_path, class: "estilo_texto"%>
+      </b>
+    </div> 
+
+    <div class="card">
+      <h2>Gêneros</h2>
+      <b>
+      <%= link_to "Listar Gêneros", generos_path, class: "estilo_texto" %><br>
+      <%= link_to "Novo Gênero", new_genero_path, class: "estilo_texto" %>
+      </b>
+    </div>
+  </div> 
+
+  <div class="logout">
+    <%= link_to "Sair", logout_path, class: "criar"%>
+  </div>
+</div>

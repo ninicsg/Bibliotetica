@@ -1,0 +1,27 @@
+<div class="show">
+    <div class="h1q">
+        <h1>
+            <%= @autor.nome %>
+        </h1>
+        <div class="aham">
+            <br>
+            <br>
+            <br>ID: <%=@autor.id %></br>
+            <br>Nome: <%= @autor.nome %></br>
+            <br>Data de nascimento: <%= @autor.data_nascimento_formatada %></br>
+            <br>Data de óbito: <%= @autor.data_morte_formatada %></br>
+
+            <br>
+            <h3>Livros deste Autor:</h3>
+            <b>
+                <ul>
+                    <% @autor.livros.each do |livro| %>
+                        <li><%= link_to livro.titulo, livro_path(livro), class: "ab" %></li>
+                    <% end %>
+                </ul>
+            </b>
+            
+            <%= link_to "Voltar", autores_path, class: "ab" %>
+        </div>
+    </div>
+ </div>

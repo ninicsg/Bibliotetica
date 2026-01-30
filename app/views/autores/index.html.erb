@@ -1,52 +1,60 @@
-<h1>Autores</h1>
+<div class="div_index">
+    <h1 class= "autores">Autores</h1>
+    <%= link_to "Voltar para Home", home_path, class: "btn-new" %>
 
-<%= link_to "Novo autor", new_autor_path, class: "btn-new" %>
+    <%= link_to "Novo autor", new_autor_path, class: "btn-new" %>
 
-<% if @autores.present? %>
+    <% if @autores.present? %>
 
-  <table class="tabela">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Data de nascimento</th>
-        <th>Data de óbito</th>
-        <th>Editar</th>
-        <th>Excluir</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @autor.each do |autor| %>
+    <table class="tabela">
+        <thead>
         <tr>
-          <td><%= autor.id %></td>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Data de nascimento</th>
+            <th>Data de óbito</th>
+            <th>Editar</th>
+            <th>Excluir</th>
 
-          <td>
-            <%= link_to autor.nome, autor_path(autor) %>
-          </td>
-          <td>
-
-          <td>
-            <%= link_to "Editar",
-              edit_autor_path(autor),
-              class: "btn-edit" %>
-          </td>
-
-          <td>
-            <%= link_to "Excluir",
-              autor_path(autor),
-              method: :delete,
-              data: { confirm: "Tem certeza?" },
-              class: "btn-delete" %>
-          </td>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </thead>
 
-<% else %>
-    <p>
-        Não existem autores cadastrados
-    <p>
-<% end %>
+        <tbody>
+        <% @autores.each do |autor| %>
+            <tr>
+            <td><%= autor.id %></td>
+
+            <td>
+                <%= link_to autor.nome, autor_path(autor) %>
+            </td>
+            <td>
+                <%= autor.data_nasc.present? ? autor.data_nasc.strftime("%d/%m/%Y") : "-" %>
+            </td>
+            <td>
+                <%= autor.data_morte.present? ? autor.data_morte.strftime("%d/%m/%Y") : "-" %>
+            </td>
+
+            <td>
+                <%= link_to "Editar",
+                edit_autor_path(autor),
+                class: "btn-edit" %>
+            </td>
+
+            <td>
+                <%= link_to "Excluir",
+                autor_path(autor),
+                method: :delete,
+                data: { confirm: "Tem certeza?" },
+                class: "btn-delete" %>
+            </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+
+    <% else %>
+        <p>
+            Não existem autores cadastrados
+        <p>
+    <% end %>
+</div>

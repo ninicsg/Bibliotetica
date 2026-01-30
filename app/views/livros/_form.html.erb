@@ -1,0 +1,57 @@
+<div class="form">
+  <h1><%= @livro.new_record? ? "Novo Livro" : "Editar Livro" %></h1>
+
+  <%= form_for @livro, url: @livro.new_record? ? create_livro_path : update_livro_path(@livro), method: @livro.new_record? ? :post : :put do |f| %>
+
+    <% if @livro.errors.any? %>
+      <div class="errors">
+        <h3>Erro ao salvar:</h3>
+        <ul>
+          <% @livro.errors.full_messages.each do |erro| %>
+            <li><%= erro %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-caixa">
+
+      <div class="campo">
+        <%= f.label :titulo, "Título" %>
+        <%= f.text_field :titulo %>
+      </div>
+
+      <div class="campo">
+        <%= f.label :autor_id, "Autor" %>
+        <%= f.collection_select :autor_id, @autores, :id, :nome, prompt: "Escolha um autor" %>
+      </div>
+
+      <div class="campo">
+        <%= f.label :genero_id, "Gênero" %>
+        <%= f.collection_select :genero_id, @generos, :id, :nome, prompt: "Escolha um gênero" %>
+      </div>
+
+      <div class="campo">
+        <%= f.label :qtd_paginas, "Quantidade de páginas" %>
+        <%= f.number_field :qtd_paginas %>
+      </div>
+
+      <div class="campo">
+        <%= f.label :ano_lancamento, "Ano de lançamento" %>
+        <%= f.number_field :ano_lancamento %>
+      </div>
+
+      <div class="campo">
+        <%= f.label :sinopse, "Sinopse" %>
+        <%= f.text_area :sinopse, rows: 5 %>
+      </div>
+
+      <div class="acao">
+        <%= f.submit "Salvar", class: "btn-primeiro" %>
+        <%= link_to "Cancelar", livros_path, class: "btn-primeiro" %>
+        <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
+      </div>
+
+    </div>
+  <% end %>
+</div>

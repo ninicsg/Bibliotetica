@@ -1,13 +1,12 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery
-
+class HomeController < ApplicationController
   before_filter :verifica_login
+
+  def index
+  end
 
   private
 
   def verifica_login
-    return if controller_name == 'login'
     redirect_to root_path unless session[:usuario_id]
   end
-
 end

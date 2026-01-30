@@ -1,15 +1,25 @@
+html, body {
+  height: 100%; 
+  margin: 0;    
+  padding: 0;   
+}
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-image: "../images/biblioteca_capa.jpg";
+  background-image: image-url('biblioteca_capa.jpg');
+  background-size: cover;            
+  background-repeat: no-repeat;       
+  background-position: center center; 
+  
 }
-
-a {
-  text-decoration: none;
-}
+// .show{
+//   background-color: rgb(34, 9, 9);
+//   display: flex;
+//   color: gold;
+//   width: 25%;
+//   justify-content: center;
+// }
 
 .form-caixa{
-  background: white;
+  background: rgb(153, 64, 64);
   padding: 20px;
   border-radius: 8px;
   width: 400px;
@@ -34,14 +44,14 @@ input {
 
 input:focus {
   outline: none;
-  border-color: blue;
+  border-color: rgb(131, 67, 25);
 }
 
 
 .btn-primeiro {
-  background-color: blue;
+  background-color: rgb(131, 67, 25);
   border-radius: 5px;
-  color: white;
+  color: black;
 }
 
 .btn-segundo {
@@ -51,15 +61,15 @@ input:focus {
 }
 
 .btn-new {
-  background-color: lightseagreen;
+  background-color: rgb(36, 17, 9);
   margin-bottom: 15px;
   display: inline-block;
-  border-radius: 5px;
-  color: black;
+  border-radius: 2px;
+  color: gold;
 }
 
 .btn-new:hover{
-    background-color:aquamarine;
+    background-color:rgb(216, 136, 44);
 }
 
 .btn-edit {
@@ -78,17 +88,29 @@ input:focus {
   border-collapse: collapse;
   width: 100%;
   background: white;
+  table-layout: fixed; 
+
 }
 
 th {
-  background-color: blue;
+  background-color: rgb(68, 26, 26);
   color: white;
   padding: 10px;
+  text-align: left; 
+  vertical-align: middle; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 td {
+  background-color: rgb(94, 85, 85);
   padding: 10px;
-  border-bottom: 1px solid whitesmoke;
+  text-align: left; 
+  vertical-align: middle; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .errors {
@@ -107,4 +129,90 @@ td {
 
 .btn-voltar:hover{
     background-color:aquamarine;
+}
+
+.login{
+  background-color:rgb(34, 9, 9);
+  width: 25%;
+  color: gold;
+}
+
+.criar{
+  color: white;
+  font-size: 25px;
+}
+
+.novo{
+  color: gold;
+  background-color: rgb(34, 9, 9);
+  width: 19%;
+}
+
+// .dashboard{
+//   color: gold;
+//   background-color:rgb(34, 9, 9);
+//   width: 19%;
+// }
+
+.autores{
+  color:gold;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #000;
+}
+.dashboard {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #000;
+  font-size: 20px;
+  
+}
+
+.div_new{
+  color:gold;
+  display: flex;
+  flex-direction: column;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.show{
+  color:gold;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit{
+  color:gold;
+  display: flex;
+  flex-direction: column;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.aham{
+  color:gold;
+  font-size: 20px;
+}
+
+
+.estilo_texto{
+  color: white;
+  font-size: 25px;
+}
+
+.ab{
+  color:white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: gold;
 }

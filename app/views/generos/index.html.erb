@@ -1,0 +1,37 @@
+<div class="div_index">
+    <h1 class="autores">Gêneros Literários</h1>
+    
+    <%= link_to "Voltar para Home", home_path, class: "btn-new" %>
+    <%= link_to "Novo Gênero", new_genero_path, class: "btn-new" %>
+
+    <% if @generos.present? %>
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @generos.each do |genero| %>
+                    <tr>
+                        <td><%= genero.id %></td>
+                        <td>
+                            <%= link_to genero.nome, genero_path(genero) %>
+                        </td>
+                        <td>
+                            <%= link_to "Editar", edit_genero_path(genero), class: "btn-edit" %>
+                            <%= link_to "Excluir", destroy_genero_path(genero), 
+                                        method: :delete, 
+                                        data: { confirm: "Tem certeza? Isso pode afetar os livros deste gênero." }, 
+                                        class: "btn-delete" %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% else %>
+        <p>Não existem gêneros cadastrados.</p>
+    <% end %>
+</div>

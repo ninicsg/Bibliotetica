@@ -1,6 +1,7 @@
+<div class="form">
 <h1>Autor</h1>
 
-<%= form_for @autor, url: @autor.new_record? ? criar_autor_path : atualizar_autor_path(@autor), method: @autor.new_record? ? :post : :put do |f| %>
+<%= form_for @autor, url: @autor.new_record? ? create_autor_path : update_autor_path(@autor), method: @autor.new_record? ? :post : :put do |f| %>
 
   <% if @autor.errors.any? %>
     <div class="errors">
@@ -33,8 +34,11 @@
     <div class="acao">
       <%= f.submit "Salvar", class: "btn-primeiro" %>
       <%= link_to "Cancelar", autores_path, class: "btn-primeiro" %>
+      <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
+
     </div>
 
   </div>
 
 <% end %>
+</div>

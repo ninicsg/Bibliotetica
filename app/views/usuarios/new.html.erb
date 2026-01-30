@@ -1,0 +1,27 @@
+<div class="novo">
+    <h1>Novo Usuário</h1>
+
+    <%= form_for @usuario do |f| %>
+
+    <% if @usuario.errors.any? %>
+        <ul>
+        <% @usuario.errors.full_messages.each do |e| %>
+            <li><%= e %></li>
+        <% end %>
+        </ul>
+    <% end %>
+
+    <div>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+    </div>
+
+    <div>
+        <%= f.label :senha %>
+        <%= f.password_field :senha %>
+    </div>
+
+    <%= f.submit "Criar conta" %>
+
+    <% end %>
+</div>

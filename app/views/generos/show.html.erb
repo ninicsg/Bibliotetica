@@ -1,0 +1,21 @@
+<div class="show">
+    <h1>Gênero: <%= @genero.nome %></h1>
+    
+    <hr>
+    <h3>Livros deste Gênero:</h3>
+    <% if @livros.any? %>
+        <ul>
+            <% @livros.each do |livro| %>
+                <li>
+                    <%= link_to livro.titulo, livro_path(livro) %> 
+                    (Autor: <%= livro.autor.try(:nome) %>)
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <p>Nenhum livro cadastrado para este gênero.</p>
+    <% end %>
+
+    <br>
+    <%= link_to "Voltar para Gêneros", generos_path %>
+</div>

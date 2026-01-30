@@ -1,13 +1,14 @@
 class AutoresController < ApplicationController
 
     def index
-        @autores = Autor.order(:id, :nome)
+        @autores = Autor.all
+        # @autores = Autor.order(:id, :nome)
     end
 
     def show
        #binding.pry
        @autor = Autor.find_by_id(params[:id])
-       #binding.pry
+       @livros = @autor.livros 
     end
 
     def new
