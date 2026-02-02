@@ -2,6 +2,8 @@ Bibliotetica::Application.routes.draw do
   get "usuarios/new"
 
   get "usuarios/create"
+  get '/usuarios/:id', to: 'usuarios#show', as: :usuario
+
 
   root to: 'login#login'
   get  '/usuarios/new', to: 'usuarios#new',    as: :new_usuario

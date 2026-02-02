@@ -15,7 +15,7 @@
             <th>Data de óbito</th>
             <th>Editar</th>
             <th>Excluir</th>
-
+            
         </tr>
         </thead>
 
@@ -39,7 +39,6 @@
                 edit_autor_path(autor),
                 class: "btn-edit" %>
             </td>
-
             <td>
             <% if autor.livros.any? %>
                 <%= link_to "Excluir", "#", 

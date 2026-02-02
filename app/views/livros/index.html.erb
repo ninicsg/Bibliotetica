@@ -1,58 +1,90 @@
 <div class="div_index">
-    <h1>Livros</h1>
+  <h1 class="livro">Livros</h1>
 
-    <div class="acoes-topo">
-        <%= link_to "Novo Livro", new_livro_path, class: "btn-primeiro" %>
-        <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
-    </div>
+  <div class="acoes-topo">
+    <%= link_to "Novo Livro", new_livro_path, class: "btn-primeiro" %>
+    <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
+  </div>
 
-    <div class="busca-container" style="margin-bottom: 20px;">
-        <%= form_tag livros_path, method: :get do %>
-            <%= text_field_tag :busca, params[:busca], placeholder: "Pesquisar título, autor ou gênero...", style: "width: 300px; padding: 5px;" %>
-            <%= submit_tag "Pesquisar", class: "btn-primeiro" %>
-            <%= link_to "Limpar", livros_path, class: "btn-primeiro" if params[:busca].present? %>
-        <% end %>
-    </div>
+  <div class="busca-container">
+    <%= form_tag livros_path, method: :get, class: "form-busca" do %>
+      <%= text_field_tag :busca, params[:busca],
+            placeholder: "Pesquisar título, autor ou gênero...",
+            class: "campo" %>
 
-    <% if @livros.any? %>
-        <table class="tabela">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Autor</th>
-                    <th>Gênero</th>
-                    <th>Páginas</th>
-                    <th>Ano</th>
-                    <th>Sinopse</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @livros.each do |livro| %>
-                <tr>
-                    <td><%= link_to livro.titulo, livro_path(livro) %></td>
-                    <td><%= livro.autor.nome if livro.autor %></td>
-                    <td><%= livro.genero.nome if livro.genero %></td>
-                    <td><%= livro.qtd_paginas %></td>
-                    <td><%= livro.ano_lancamento %></td>
-                    <td class="sinopse-restrita">
-                        <div class="conteudo-sinopse">
-                            <%= truncate(livro.sinopse, length: 100, separator: ' ') %>
-                        </div>
-                    </td>
-                    <td>
-                        <%= link_to "Editar", edit_livro_path(livro), class: "btn-primeiro" %>
-                        <%= link_to "Deletar", destroy_livro_path(livro), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn-primeiro" %>
-                    </td>
-                </tr>
-                <% end %>
-            </tbody>
-        </table>
-    <% else %>
-        <div class="form-caixa">
-            <h2 style="color: gold;">EITAR</h2>
-            <p>Nenhum livro foi encontrado para a pesquisa: <strong>"<%= params[:busca] %>"</strong></p>
-            <%= link_to "Ver todos os livros", livros_path, class: "btn-primeiro" %>
-        </div>
+      <div class="acao">
+        <%= submit_tag "Pesquisar", class: "btn-primeiro" %>
+        <%= link_to "Limpar", livros_path, class: "btn-primeiro" if params[:busca].present? %>
+      </div>
     <% end %>
+  </div>
+
+  <% if @livros.any? %>
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Autor</th>
+          <th>Gênero</th>
+          <th>Páginas</th>
+          <th>Ano</th>
+          <th>Sinopse</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @livros.each do |livro| %>
+          <tr>
+            <td>
+              <%= link_to livro.titulo, livro_path(livro) %>
+            </td>
+
+            <td>
+              <%= livro.autor.nome if livro.autor %>
+            </td>
+
+            <td>
+              <%= livro.genero.nome if livro.genero %>
+            </td>
+
+            <td>
+              <%= livro.qtd_paginas %>
+            </td>
+
+            <td>
+              <%= livro.ano_lancamento %>
+            </td>
+
+            <td class="sinopse-restrita">
+              <div class="conteudo-sinopse">
+                <%= truncate(livro.sinopse, length: 100, separator: ' ') %>
+              </div>
+            </td>
+
+            <td>
+              <div class="acao">
+                <%= link_to "Editar", edit_livro_path(livro), class: "btn-primeiro" %>
+                <%= link_to "Deletar",
+                      destroy_livro_path(livro),
+                      method: :delete,
+                      data: { confirm: "Tem certeza?" },
+                      class: "btn-segundo" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="form-caixa">
+      <h2 style="color: gold;">EITAR</h2>
+      <p>
+        Nenhum livro foi encontrado para a pesquisa:
+        <strong>"<%= params[:busca] %>"</strong>
+      </p>
+
+      <%= link_to "Ver todos os livros", livros_path, class: "btn-primeiro" %>
+    </div>
+  <% end %>
 </div>

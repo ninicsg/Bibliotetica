@@ -14,9 +14,9 @@
             <br>
             <h3>Livros deste Autor:</h3>
             <b>
-                <ul>
+                <ul class="yes">
                     <% @autor.livros.each do |livro| %>
-                        <li><%= link_to livro.titulo, livro_path(livro), class: "ab" %></li>
+                        <li class="yes"><%= link_to livro.titulo, livro_path(livro), class: "ab" %></li>
                     <% end %>
                 </ul>
             </b>

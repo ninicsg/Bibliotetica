@@ -4,6 +4,10 @@ class UsuariosController < ApplicationController
   def new
     @usuario = Usuario.new
   end
+  
+  def show
+    @usuario = Usuario.find(params[:id])
+  end
 
   def create
     @usuario = Usuario.new(params[:usuario])

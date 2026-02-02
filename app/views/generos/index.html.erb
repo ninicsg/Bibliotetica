@@ -10,7 +10,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
-                    <th>Ações</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,11 +23,12 @@
                         </td>
                         <td>
                             <%= link_to "Editar", edit_genero_path(genero), class: "btn-edit" %>
+                            </td><td>
                             <% if genero.livros.any? %>
                                 <%= link_to "Excluir", "#", 
                                     class: "btn-delete", 
                                     style: "opacity: 0.5; cursor: not-allowed;", 
-                                    onclick: "alert('Este autor possui #{genero.livros.count} livro(s) e não pode ser excluído.'); return false;" %>
+                                    onclick: "alert('Este gênero possui #{genero.livros.count} livro(s) vinculados e não pode ser excluído.'); return false;" %>
                             <% else %>
                                 <%= link_to "Excluir",
                                     genero_path(genero),

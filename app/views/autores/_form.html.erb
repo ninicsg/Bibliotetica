@@ -1,44 +1,73 @@
-<div class="form">
-<h1>Autor</h1>
+<div class="div_index">
+  <div class="form">
+    <h1 class="autores">Autor</h1>
 
-<%= form_for @autor, url: @autor.new_record? ? create_autor_path : update_autor_path(@autor), method: @autor.new_record? ? :post : :put do |f| %>
+    <%= form_for @autor, url: @autor.new_record? ? create_autor_path : update_autor_path(@autor),
+                  method: @autor.new_record? ? :post : :put do |f| %>
 
-  <% if @autor.errors.any? %>
-    <div class="errors">
-      <h3>Erro ao salvar:</h3>
-      <ul>
-        <% @autor.errors.full_messages.each do |erro| %>
-          <li><%= erro %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <% if @autor.errors.any? %>
+        <div class="errors">
+          <h3>Erro ao salvar:</h3>
+          <ul>
+            <% @autor.errors.full_messages.each do |erro| %>
+              <li><%= erro %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="form-caixa">
+      <div class="form-caixa">
 
-    <div class="campo">
-      <%= f.label :nome, "Nome" %>
-      <%= f.text_field :nome %>
-    </div>
+        <div class="campo">
+          <%= f.label :nome, "Nome" %>
+          <%= f.text_field :nome, placeholder: "Digite o nome do autor" %>
+        </div>
 
-    <div class="campo">
-      <%= f.label :data_nasc, "Data de nascimento" %>
-      <%= f.text_field :data_nasc %>
-    </div>
+        <div class="campo">
+          <%= f.label :data_nasc, "Data de nascimento" %>
+          <%= f.text_field :data_nasc, id: "data_nasc_input", placeholder: "dd/mm/aaaa", maxlength: 10 %>
+        </div>
 
-    <div class="campo">
-      <%= f.label :data_morte, "Data de óbito" %>
-      <%= f.text_field :data_morte %>
-    </div>
+        <div class="campo">
+          <%= f.label :data_morte, "Data de óbito" %>
+          <%= f.text_field :data_morte, id: "data_morte_input", placeholder: "dd/mm/aaaa", maxlength: 10 %>
+        </div>
 
-    <div class="acao">
-      <%= f.submit "Salvar", class: "btn-primeiro" %>
-      <%= link_to "Cancelar", autores_path, class: "btn-primeiro" %>
-      <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
+        <div class="acao">
+          <%= f.submit "Salvar", class: "btn-new" %>
+          <%= link_to "Cancelar", autores_path, class: "btn-voltar" %>
+          <%= link_to "Voltar para Home", home_path, class: "btn-voltar" %>
+        </div>
 
-    </div>
-
+      </div>
+    <% end %>
   </div>
-
-<% end %>
 </div>
+
+<script>
+  var inputNascimento = document.getElementById("data_nasc_input");
+  if (inputNascimento) {
+    inputNascimento.addEventListener("input", function(e) {
+      var value = inputNascimento.value.replace(/\D/g, "");
+      if (value.length > 2 && value.length <= 4) {
+        value = value.slice(0, 2) + "/" + value.slice(2);
+      } else if (value.length > 4) {
+        value = value.slice(0, 2) + "/" + value.slice(2,4) + "/" + value.slice(4,8);
+      }
+      inputNascimento.value = value;
+    });
+  }
+
+  var inputObito = document.getElementById("data_morte_input");
+  if (inputObito) {
+    inputObito.addEventListener("input", function(e) {
+      var value = inputObito.value.replace(/\D/g, "");
+      if (value.length > 2 && value.length <= 4) {
+        value = value.slice(0, 2) + "/" + value.slice(2);
+      } else if (value.length > 4) {
+        value = value.slice(0, 2) + "/" + value.slice(2,4) + "/" + value.slice(4,8);
+      }
+      inputObito.value = value;
+    });
+  }
+</script>
