@@ -5,12 +5,17 @@ class LoginController < ApplicationController
   end
 
   def logar
-    usuario = Usuario.where(email: params[:login]).first
+    login = params[:login]
+    senha = params[:senha]
 
+    usuario = Usuario.where(
+      "email = ? OR username = ?",
+      login, login
+    ).first
 
     if usuario && usuario.senha == params[:senha]
       session[:usuario_id] = usuario.id
-      redirect_to home_path
+      redirect_to home_path and return
     else
       flash[:erro] = "Login ou senha inválidos"
       render :login
@@ -19,6 +24,6 @@ class LoginController < ApplicationController
 
   def logout
     session[:usuario_id] = nil
-    redirect_to root_path
+    redirect_to login_path
   end
 end

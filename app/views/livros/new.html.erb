@@ -25,7 +25,7 @@
       <%= f.collection_select :autor_id, @autores, :id, :nome, prompt: "Selecione um autor" %>
     </div>
 
-    <div class="campo">
+    <div class="campo">                         
       <%= f.label :genero_id, "Gênero" %>
       <%= f.collection_select :genero_id, @generos, :id, :nome, prompt: "Selecione um gênero" %>
     </div>
