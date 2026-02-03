@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20260203125012) do
+ActiveRecord::Schema.define(:version => 20260203193654) do
 
   create_table "autores", :force => true do |t|
     t.string   "nome"
@@ -55,11 +55,12 @@ ActiveRecord::Schema.define(:version => 20260203125012) do
   add_index "livros", ["genero_id"], :name => "index_livros_on_genero_id"
 
   create_table "reservas", :force => true do |t|
-    t.integer  "usuario_id", :null => false
-    t.integer  "livro_id",   :null => false
+    t.integer  "usuario_id",     :null => false
+    t.integer  "livro_id",       :null => false
     t.integer  "posicao"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.date     "data_expiracao"
   end
 
   add_index "reservas", ["livro_id"], :name => "index_reservas_on_livro_id"

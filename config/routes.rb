@@ -42,5 +42,7 @@ Bibliotetica::Application.routes.draw do
   post '/livros/:livro_id/emprestar', to: 'emprestimos#create', as: :emprestar_livro
   put  '/emprestimos/:id/devolver',   to: 'emprestimos#devolver', as: :devolver_emprestimo
   post '/livros/:livro_id/reservar', to: 'reservas#create', as: :reservar_livro
+  delete '/reservas/:id', to: 'reservas#destroy', as: :cancelar_reserva
+
 
 end

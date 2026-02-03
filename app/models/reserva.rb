@@ -1,5 +1,5 @@
 class Reserva < ActiveRecord::Base
-  attr_accessible :usuario_id, :livro_id, :posicao
+  attr_accessible :usuario_id, :livro_id, :posicao, :data_expiracao
 
   belongs_to :usuario
   belongs_to :livro
@@ -7,7 +7,7 @@ class Reserva < ActiveRecord::Base
   validates :usuario_id, :livro_id, presence: true
   validate :usuario_pode_reservar, on: :create
 
-  default_scope order(:posicao)
+  before_create :definir_data_expiracao
 
   private
 
@@ -23,5 +23,9 @@ class Reserva < ActiveRecord::Base
        )
       errors.add(:base, "Você já está com este livro emprestado")
     end
+  end
+
+  def definir_data_expiracao
+    self.data_expiracao = Date.today + 7.days
   end
 end

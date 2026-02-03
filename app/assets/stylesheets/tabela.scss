@@ -72,7 +72,7 @@ body {
   font-family: 'Allura', cursive;
   gap: 25px;
 }
-.div_new, .edit, .show, .login {
+.div_new, .edit, .show{
   background: rgba(43, 18, 11, 0.92);
   backdrop-filter: blur(12px);
   padding: 35px;
@@ -89,6 +89,24 @@ body {
   align-items: center;
   font-family: 'Allura', cursive;
 
+}
+
+.login{
+  background: linear-gradient(rgba(65, 59, 59, 0.75), rgba(231, 169, 34, 0.75));
+  backdrop-filter: blur(12px);
+  padding: 35px;
+  border-radius: 18px;
+  width: 90%;
+  max-width: 450px;
+  margin: 40px auto;
+
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Allura', cursive;
 }
 .show{
   background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), image-url('livro_aberto2.jpg');
@@ -341,4 +359,9 @@ tr:hover td {
 .ab{
   font-family: 'Allura', cursive;
   font-size:35px;
+}
+
+.cancelar-reserva {
+  display: inline-block;
+  margin-top: 8px;
 }

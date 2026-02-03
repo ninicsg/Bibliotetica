@@ -19,4 +19,15 @@ class ReservasController < ApplicationController
 
     redirect_to livro_path(livro), notice: "Livro reservado! Posição na fila: #{ultima_posicao + 1}"
   end
+
+    def destroy
+        reserva = Reserva.find(params[:id])
+
+        if reserva.usuario_id == session[:usuario_id]
+            reserva.destroy
+            redirect_to :back, notice: "Reserva cancelada com sucesso!" #volta p mesma pag que tava
+        else
+            redirect_to :back, alert: "Acesso não autorizado"
+        end
+    end
 end

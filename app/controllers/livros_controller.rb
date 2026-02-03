@@ -36,7 +36,12 @@ def create
 end
 
   def show
-    @livro = Livro.find(params[:id])
+  @livro = Livro.find(params[:id])
+
+  @reserva_do_usuario = Reserva.where(
+    usuario_id: session[:usuario_id],
+    livro_id: @livro.id
+    ).first
   end
 
   def edit

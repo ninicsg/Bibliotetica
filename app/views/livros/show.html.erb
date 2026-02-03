@@ -33,25 +33,35 @@
 
       <div class="acoes">
         <% if emprestimo_ativo && emprestimo_ativo.usuario_id == session[:usuario_id] %>
+
           <%= link_to "Devolver Livro",
               devolver_emprestimo_path(emprestimo_ativo),
               method: :put,
               class: "btn-segundo" %>
 
         <% elsif emprestimo_ativo %>
-          <%= link_to "📌 Reservar Livro",
-              reservar_livro_path(@livro),
-              method: :post,
-              class: "btn-primeiro" %>
+
+          <% if @reserva_do_usuario %>
+            <%= link_to "Cancelar Reserva",
+                cancelar_reserva_path(@reserva_do_usuario),
+                method: :delete,
+                class: "btn-segundo" %>
+          <% else %>
+            <%= link_to "📌 Reservar Livro",
+                reservar_livro_path(@livro),
+                method: :post,
+                class: "btn-primeiro" %>
+          <% end %>
 
         <% else %>
+
           <%= link_to "📘 Emprestar Livro",
               emprestar_livro_path(@livro),
               method: :post,
               class: "btn-primeiro" %>
+
         <% end %>
       </div>
-
       <div class="sinopse-restrita">
         <strong>Sinopse:</strong>
         <div class="conteudo-sinopse">

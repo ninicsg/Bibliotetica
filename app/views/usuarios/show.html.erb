@@ -1,6 +1,6 @@
 <div class="show">
   <div class="h1q">
-    <h1>Minha Biblioteca</h1>
+    <h1>Meu perfil</h1>
 
     <div class="aham">
       <p><strong>ID:</strong> <%= @usuario.id %></p>
@@ -9,20 +9,13 @@
 
       <hr>
 
-      <h2 class="acoes-livro">📖Empréstimos Ativos</h2>
-
+      <h2 class="acoes-livro">📖 Empréstimos Ativos</h2>
       <% if @emprestimos_ativos.any? %>
         <ul>
           <% @emprestimos_ativos.each do |e| %>
             <li>
               <% if e.livro %>
                 <strong><%= e.livro.titulo %></strong>
-              <% else %>
-                <strong style="color:red;">Livro removido</strong>
-              <% end %>
-              <br>
-
-              <% if e.livro %>
                 <div class="acoes-livro">
                   Devolver até:
                   <span style="color:<%= e.atrasado? ? 'red' : 'green' %>;">
@@ -30,16 +23,12 @@
                   </span>
                 </div>
 
-                <%= link_to "Ver Livro",
-                      livro_path(e.livro),
-                      class: "btn-primeiro" %>
-                <%= link_to "Devolver",
-                      devolver_livro_path(e.livro),
-                      method: :post,
-                      class: "btn-segundo" %>
+                <%= link_to "Ver Livro", livro_path(e.livro), class: "btn-primeiro" %>
+                <%= link_to "Devolver", devolver_livro_path(e.livro), method: :post, class: "btn-segundo" %>
+              <% else %>
+                <strong style="color:red;">Livro removido</strong>
               <% end %>
             </li>
-            <br>
           <% end %>
         </ul>
       <% else %>
@@ -48,43 +37,41 @@
 
       <% if @emprestimos_atrasados.any? %>
         <hr>
-        <h2 style="color:red;">⏰Empréstimos Atrasados</h2>
-        <p>
-          Você possui <strong><%= @emprestimos_atrasados.count %></strong>
-          empréstimo(s) em atraso.
-        </p>
+        <h2 style="color:red;">⏰ Empréstimos Atrasados</h2>
+        <p>Você possui <strong><%= @emprestimos_atrasados.count %></strong> empréstimo(s) em atraso.</p>
       <% end %>
 
       <hr>
 
-      <h2>⌛Minhas Reservas</h2>
+        <h2>⌛ Minhas Reservas</h2>
 
-      <% if @reservas.any? %>
+        <% if @reservas.any? %>
         <ul>
-          <% @reservas.each do |r| %>
+            <% @reservas.each do |r| %>
             <li>
-              <% if r.livro %>
+                <% if r.livro %>
                 <strong><%= r.livro.titulo %></strong>
+                <br>Posição na fila: <strong><%= r.posicao %></strong>
                 <br>
-                Posição na fila:
-                <strong><%= r.posicao %></strong>
-
                 <%= link_to "Ver Livro",
-                      livro_path(r.livro),
-                      class: "btn-primeiro" %>
-              <% else %>
+                            livro_path(r.livro),
+                            class: "btn-primeiro" %>
+                <%= link_to "Cancelar Reserva",
+                            cancelar_reserva_path(r),
+                            method: :delete,
+                            class: "btn-segundo cancelar-reserva" %>
+                <% else %>
                 <strong style="color:red;">Livro removido</strong>
-              <% end %>
+                <% end %>
             </li>
             <br>
-          <% end %>
+            <% end %>
         </ul>
-      <% else %>
+        <% else %>
         <p>Você não possui reservas.</p>
-      <% end %>
+        <% end %>
 
       <hr>
-
       <%= link_to "Voltar", home_path, class: "btn-primeiro" %>
     </div>
   </div>
