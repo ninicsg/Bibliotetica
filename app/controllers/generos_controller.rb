@@ -38,7 +38,6 @@ class GenerosController < ApplicationController
         @genero.destroy
         redirect_to generos_path, notice: 'Gênero excluído com sucesso!'
     rescue ActiveRecord::DeleteRestrictionError
-        # Em vez de dar erro 500, capturamos a exceção e avisamos o usuário
         redirect_to generos_path, alert: 'Não é possível excluir: este gênero possui livros cadastrados.'
     end
     end

@@ -8,9 +8,7 @@
 
   <div class="busca-container">
     <%= form_tag livros_path, method: :get, class: "form-busca" do %>
-      <%= text_field_tag :busca, params[:busca],
-            placeholder: "Pesquisar título, autor ou gênero...",
-            class: "campo" %>
+      <%= text_field_tag :busca, params[:busca], placeholder: "Pesquisar título, autor ou gênero...", class: "campo" %>
 
       <div class="acao">
         <%= submit_tag "Pesquisar", class: "btn-primeiro" %>

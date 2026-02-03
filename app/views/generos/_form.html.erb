@@ -1,0 +1,32 @@
+<div class="form">
+  <h1><%= @genero.new_record? ? "Novo Gênero" : "Editar Gênero" %></h1>
+
+  <%= form_for @genero, url: @genero.new_record? ? create_genero_path : update_genero_path(@genero), method: @genero.new_record? ? :post : :put do |f| %>
+
+    <% if @genero.errors.any? %>
+      <div class="errors">
+        <h3>Erro ao salvar:</h3>
+        <ul>
+          <% @genero.errors.full_messages.each do |erro| %>
+            <li><%= erro %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-caixa">
+
+      <div class="campo">
+        <%= f.label :nome, "Nome" %>
+        <%= f.text_field :nome %>
+      </div>
+
+      <div class="acao">
+        <%= f.submit "Salvar", class: "btn-primeiro" %>
+        <%= link_to "Cancelar", generos_path, class: "btn-primeiro" %>
+        <%= link_to "Voltar para Home", home_path, class: "btn-primeiro" %>
+      </div>
+
+    </div>
+  <% end %>
+</div>

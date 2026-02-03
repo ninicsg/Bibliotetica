@@ -1,20 +1,68 @@
 <div class="show">
   <div class="h1q">
     <h1><%= @livro.titulo %></h1>
-    
+
     <div class="aham">
       <p><strong>Autor:</strong> <%= @livro.autor.try(:nome) %></p>
       <p><strong>Gênero:</strong> <%= @livro.genero.try(:nome) %></p>
-      
+
+      <% emprestimo_ativo = @livro.emprestimos.ativos.first %>
+
+      <p>
+        <strong>Status:</strong>
+        <% if emprestimo_ativo %>
+          <span style="color:red;">Indisponível</span>
+        <% else %>
+          <span style="color:green;">Disponível</span>
+        <% end %>
+      </p>
+
+      <% if emprestimo_ativo %>
+        <p>
+          <strong>Devolver até:</strong>
+          <%= emprestimo_ativo.data_prevista_devolucao.strftime("%d/%m/%Y") %>
+        </p>
+      <% end %>
+
+      <% if @livro.reservas.any? %>
+        <p>
+          <strong>Fila de reservas:</strong>
+          <%= @livro.reservas.count %> pessoa(s)
+        </p>
+      <% end %>
+
+      <div class="acoes">
+        <% if emprestimo_ativo && emprestimo_ativo.usuario_id == session[:usuario_id] %>
+          <%= link_to "Devolver Livro",
+              devolver_emprestimo_path(emprestimo_ativo),
+              method: :put,
+              class: "btn-segundo" %>
+
+        <% elsif emprestimo_ativo %>
+          <%= link_to "📌 Reservar Livro",
+              reservar_livro_path(@livro),
+              method: :post,
+              class: "btn-primeiro" %>
+
+        <% else %>
+          <%= link_to "📘 Emprestar Livro",
+              emprestar_livro_path(@livro),
+              method: :post,
+              class: "btn-primeiro" %>
+        <% end %>
+      </div>
+
       <div class="sinopse-restrita">
         <strong>Sinopse:</strong>
         <div class="conteudo-sinopse">
           <%= simple_format(@livro.sinopse) %>
         </div>
       </div>
-    <%= link_to "Editar", edit_livro_path(@livro) %> |
-    <%= link_to "Voltar", livros_path %>
-      </div>
+
+      <br>
+
+      <%= link_to "Editar", edit_livro_path(@livro) %> |
+      <%= link_to "Voltar", livros_path %>
     </div>
   </div>
 </div>

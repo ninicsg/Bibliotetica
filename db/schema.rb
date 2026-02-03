@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20260202112851) do
+ActiveRecord::Schema.define(:version => 20260203125012) do
 
   create_table "autores", :force => true do |t|
     t.string   "nome"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(:version => 20260202112851) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "emprestimos", :force => true do |t|
+    t.integer  "usuario_id",              :null => false
+    t.integer  "livro_id",                :null => false
+    t.date     "data_emprestimo"
+    t.date     "data_prevista_devolucao"
+    t.date     "data_devolucao"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "emprestimos", ["livro_id"], :name => "index_emprestimos_on_livro_id"
+  add_index "emprestimos", ["usuario_id"], :name => "index_emprestimos_on_usuario_id"
 
   create_table "generos", :force => true do |t|
     t.string   "nome"
@@ -40,6 +53,17 @@ ActiveRecord::Schema.define(:version => 20260202112851) do
 
   add_index "livros", ["autor_id"], :name => "index_livros_on_autor_id"
   add_index "livros", ["genero_id"], :name => "index_livros_on_genero_id"
+
+  create_table "reservas", :force => true do |t|
+    t.integer  "usuario_id", :null => false
+    t.integer  "livro_id",   :null => false
+    t.integer  "posicao"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "reservas", ["livro_id"], :name => "index_reservas_on_livro_id"
+  add_index "reservas", ["usuario_id"], :name => "index_reservas_on_usuario_id"
 
   create_table "usuarios", :force => true do |t|
     t.string   "email"

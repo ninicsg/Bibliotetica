@@ -1,37 +1,97 @@
 <div class="logout">
-  <%= link_to "Sair", logout_path, class: "criar"%>
+  <%= link_to "Sair", logout_path, class: "criar" %>
   <%= link_to "Meu Perfil", usuario_path(session[:usuario_id]), class: "criar" %>
-
+  <%
+=begin%>
+ <%= link_to "Meus Empréstimos", usuario_path(session[:usuario_id]), class: "criar" %> 
+<%
+=end%>
 </div>
-
 
 <div class="dashboard">
   <h1 class="biblio">Bibliotética</h1>
 
   <div class="menu">
+
     <div class="card">
       <h2 class="livro">Autores</h2>
       <b>
-      <%= link_to "Listar Autores", autores_path, class: "estilo_texto"%><br>
-      <%= link_to "Novo Autor", new_autor_path, class: "estilo_texto"%>
+        <%= link_to "Listar Autores", autores_path, class: "estilo_texto" %><br>
+        <%= link_to "Novo Autor", new_autor_path, class: "estilo_texto" %>
       </b>
     </div>
 
-  
- <div class="card">
+    <div class="card">
       <h2 class="livro">Livros</h2>
       <b>
-      <%= link_to "Listar Livros", livros_path, class: "estilo_texto"%><br>
-      <%= link_to "Novo Livro", new_livro_path, class: "estilo_texto"%>
+        <%= link_to "Listar Livros", livros_path, class: "estilo_texto" %><br>
+        <%= link_to "Novo Livro", new_livro_path, class: "estilo_texto" %>
       </b>
-    </div> 
+    </div>
 
     <div class="card">
       <h2 class="livro">Gêneros</h2>
       <b>
-      <%= link_to "Listar Gêneros", generos_path, class: "estilo_texto" %><br>
-      <%= link_to "Novo Gênero", new_genero_path, class: "estilo_texto" %>
+        <%= link_to "Listar Gêneros", generos_path, class: "estilo_texto" %><br>
+        <%= link_to "Novo Gênero", new_genero_path, class: "estilo_texto" %>
       </b>
     </div>
-  </div> 
+
+    <%
+=begin%>
+ <div class="card">
+      <h2 class="livro">Minha Biblioteca</h2>
+      <b>
+        <%= link_to "Meus Empréstimos",
+            usuario_path(session[:usuario_id]),
+            class: "estilo_texto" %><br>
+
+        <%= link_to "Minhas Reservas",
+            usuario_path(session[:usuario_id]),
+            class: "estilo_texto" %>
+      </b>
+    </div> 
+<%
+=end%>
+
+  </div>
+  <div class="dashboard">
+    <h2 class="biblio">📕 Livros Emprestados</h2>
+
+    <% @emprestimos.each do |e| %>
+      <div class="card" style="margin-bottom: 12px;">
+        <strong><%= e.livro.titulo %></strong><br>
+
+        👤Emprestado para:
+        <span class="nome-usuario">
+          <%= e.usuario.username %>
+        </span><br>
+
+        ⏰ Devolver até:
+        <%= e.data_prevista_devolucao.strftime("%d/%m/%Y") %>
+
+        <% if e.atrasado? %>
+          <span style="color:red; font-weight:bold;">(ATRASADO)</span>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="card">
+      <h2 class="livro">📗 Livros disponíveis</h2>
+
+      <% if @livros_disponiveis.any? %>
+        <% @livros_disponiveis.each do |livro| %>
+          <div class="item-lista">
+            📘
+            <%= link_to livro.titulo,
+                livro_path(livro),
+                class: "link-livro" %>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="vazio">Nenhum disponível</p>
+      <% end %>
+    </div>
+
+  </div>
 </div>

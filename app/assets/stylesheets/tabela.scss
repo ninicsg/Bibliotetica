@@ -32,6 +32,21 @@ body {
   font-family: 'Allura', cursive;
   font-size: 23px;
 }
+.aham,
+.sinopse-restrita,
+.acoes-livro {
+  position: relative;
+  float: none;
+  clear: both;
+}
+.sinopse-restrita {
+  margin-top: 24px;
+  overflow: visible;
+}
+.acoes-livro {
+  display: block;
+  margin: 16px 0;
+}
 
 .biblio{
   font-family: 'Allura', cursive;
