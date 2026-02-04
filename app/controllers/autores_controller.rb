@@ -7,7 +7,7 @@ class AutoresController < ApplicationController
 
     def show
        #binding.pry
-       @autor = Autor.find_by_id(params[:id])
+       @autor = Autor.find_by_id(params[:id]) #busca pelo id
        @livros = @autor.livros 
     end
 
@@ -45,7 +45,7 @@ class AutoresController < ApplicationController
     begin
         @autor.destroy
         flash[:notice] = "Autor excluído com sucesso!"
-    rescue ActiveRecord::DeleteRestrictionError
+    rescue ActiveRecord::DeleteRestrictionError #nao deixa excluir se tiver filhos vinculados
         flash[:alert] = "Não é possível excluir este autor pois ele possui livros vinculados."
     end
 

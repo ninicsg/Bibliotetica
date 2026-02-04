@@ -1,97 +1,97 @@
 <div class="logout">
-  <%= link_to "Sair", logout_path, class: "criar" %>
   <%= link_to "Meu Perfil", usuario_path(session[:usuario_id]), class: "criar" %>
-  <%
-=begin%>
- <%= link_to "Meus Empréstimos", usuario_path(session[:usuario_id]), class: "criar" %> 
-<%
-=end%>
+  <%= link_to "Sair", logout_path, class: "criar" %>
+</div>
+
+<div class="hero">
+  <div class="hero-text">
+    <h1>BibliotÉtica</h1>
+
+    <p>
+      Gerenciamento de livros, autores e gêneros.
+    </p>
+
+    <div class="hero-actions">
+      <%= link_to "Ver Livros", livros_path, class: "hero-btn" %>
+    </div>
+  </div>
+
+  <div class="hero-image"></div>
 </div>
 
 <div class="dashboard">
-  <h1 class="biblio">Bibliotética</h1>
 
-  <div class="menu">
+<div class="menu-grid">
 
-    <div class="card">
-      <h2 class="livro">Autores</h2>
-      <b>
-        <%= link_to "Listar Autores", autores_path, class: "estilo_texto" %><br>
-        <%= link_to "Novo Autor", new_autor_path, class: "estilo_texto" %>
-      </b>
-    </div>
-
-    <div class="card">
-      <h2 class="livro">Livros</h2>
-      <b>
-        <%= link_to "Listar Livros", livros_path, class: "estilo_texto" %><br>
-        <%= link_to "Novo Livro", new_livro_path, class: "estilo_texto" %>
-      </b>
-    </div>
-
-    <div class="card">
-      <h2 class="livro">Gêneros</h2>
-      <b>
-        <%= link_to "Listar Gêneros", generos_path, class: "estilo_texto" %><br>
-        <%= link_to "Novo Gênero", new_genero_path, class: "estilo_texto" %>
-      </b>
-    </div>
-
-    <%
-=begin%>
- <div class="card">
-      <h2 class="livro">Minha Biblioteca</h2>
-      <b>
-        <%= link_to "Meus Empréstimos",
-            usuario_path(session[:usuario_id]),
-            class: "estilo_texto" %><br>
-
-        <%= link_to "Minhas Reservas",
-            usuario_path(session[:usuario_id]),
-            class: "estilo_texto" %>
-      </b>
-    </div> 
-<%
-=end%>
-
+  <div class="card card-large">
+    <h2 class="livro">Autores</h2>
+    <b>
+      <%= link_to "Listar Autores", autores_path, class: "estilo_texto" %><br>
+      <%= link_to "Novo Autor", new_autor_path, class: "estilo_texto" %>
+    </b>
   </div>
-  <div class="dashboard">
-    <h2 class="biblio">📕 Livros Emprestados</h2>
 
-    <% @emprestimos.each do |e| %>
-      <div class="card" style="margin-bottom: 12px;">
-        <strong><%= e.livro.titulo %></strong><br>
+  <div class="card card-medium">
+    <h2 class="livro">Livros</h2>
+    <b>
+      <%= link_to "Listar Livros", livros_path, class: "estilo_texto" %><br>
+      <%= link_to "Novo Livro", new_livro_path, class: "estilo_texto" %>
+    </b>
+  </div>
 
-        👤Emprestado para:
-        <span class="nome-usuario">
-          <%= e.usuario.username %>
-        </span><br>
+  <div class="card card-small">
+    <h2 class="livro">Gêneros</h2>
+    <b>
+      <%= link_to "Listar Gêneros", generos_path, class: "estilo_texto" %><br>
+      <%= link_to "Novo Gênero", new_genero_path, class: "estilo_texto" %>
+    </b>
+  </div>
 
-        ⏰ Devolver até:
-        <%= e.data_prevista_devolucao.strftime("%d/%m/%Y") %>
+</div>
 
-        <% if e.atrasado? %>
-          <span style="color:red; font-weight:bold;">(ATRASADO)</span>
-        <% end %>
-      </div>
+  <div class="secao">
+    <h2 class="biblio">Livros Emprestados</h2>
+
+    <% if @emprestimos.any? %>
+      <% @emprestimos.each do |e| %>
+        <div class="card" style="margin-bottom: 15px;">
+          <strong><%= e.livro.titulo %></strong><br>
+
+          👤 Emprestado para:
+          <span class="nome-usuario">
+            <%= e.usuario.username %>
+          </span><br>
+
+          ⏰ Devolver até:
+          <%= e.data_prevista_devolucao.strftime("%d/%m/%Y") %>
+
+          <% if e.atrasado? %>
+            <span class="atrasado">(ATRASADO)</span>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="vazio">Nenhum empréstimo ativo.</p>
     <% end %>
+  </div>
+
+  <div class="secao">
+    <h2 class="biblio">Livros Disponíveis</h2>
 
     <div class="card">
-      <h2 class="livro">📗 Livros disponíveis</h2>
-
       <% if @livros_disponiveis.any? %>
         <% @livros_disponiveis.each do |livro| %>
           <div class="item-lista">
-            📘
+            -
             <%= link_to livro.titulo,
                 livro_path(livro),
                 class: "link-livro" %>
           </div>
         <% end %>
       <% else %>
-        <p class="vazio">Nenhum disponível</p>
+        <p class="vazio">Nenhum livro disponível.</p>
       <% end %>
     </div>
-
   </div>
+
 </div>
